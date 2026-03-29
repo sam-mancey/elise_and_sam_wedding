@@ -151,20 +151,6 @@
 
         <div class="form-section-head" style="margin-top:1.75rem;">Allergen Information</div>
         <p style="font-size:0.8rem;color:var(--ink-light);margin-bottom:1rem;">Tick any allergens relevant to anyone in your party. We'll ensure the kitchen is fully informed.</p>
-        <div class="checkbox-grid">
-          <label class="checkbox-item"><input type="checkbox" name="allergens[]" value="Nuts/Peanuts"> Tree Nuts / Peanuts</label>
-          <label class="checkbox-item"><input type="checkbox" name="allergens[]" value="Fenugreek"> Fenugreek (incl. curry powder)</label>
-          <label class="checkbox-item"><input type="checkbox" name="allergens[]" value="Gluten/Wheat"> Gluten / Wheat</label>
-          <label class="checkbox-item"><input type="checkbox" name="allergens[]" value="Dairy"> Dairy / Lactose</label>
-          <label class="checkbox-item"><input type="checkbox" name="allergens[]" value="Eggs"> Eggs</label>
-          <label class="checkbox-item"><input type="checkbox" name="allergens[]" value="Shellfish"> Shellfish</label>
-          <label class="checkbox-item"><input type="checkbox" name="allergens[]" value="Fish"> Fish</label>
-          <label class="checkbox-item"><input type="checkbox" name="allergens[]" value="Soya"> Soya</label>
-          <label class="checkbox-item"><input type="checkbox" name="allergens[]" value="Sesame"> Sesame</label>
-          <label class="checkbox-item"><input type="checkbox" name="allergens[]" value="Celery"> Celery</label>
-          <label class="checkbox-item"><input type="checkbox" name="allergens[]" value="Mustard"> Mustard</label>
-          <label class="checkbox-item"><input type="checkbox" name="allergens[]" value="Sulphites"> Sulphites</label>
-        </div>
 
         <div class="form-section-head" style="margin-top:1.75rem;">Song Request &amp; Message</div>
         <div class="form-row">
@@ -186,20 +172,6 @@
 
         <div class="form-section-head" style="margin-top:1.75rem;">Allergen Information</div>
         <p style="font-size:0.8rem;color:var(--ink-light);margin-bottom:1rem;">Please tick any allergens relevant to anyone in your party. We'll ensure the kitchen is fully informed.</p>
-        <div class="checkbox-grid">
-          <label class="checkbox-item"><input type="checkbox" name="allergens[]" value="Nuts/Peanuts"> Tree Nuts / Peanuts</label>
-          <label class="checkbox-item"><input type="checkbox" name="allergens[]" value="Fenugreek"> Fenugreek (incl. curry powder)</label>
-          <label class="checkbox-item"><input type="checkbox" name="allergens[]" value="Gluten/Wheat"> Gluten / Wheat</label>
-          <label class="checkbox-item"><input type="checkbox" name="allergens[]" value="Dairy"> Dairy / Lactose</label>
-          <label class="checkbox-item"><input type="checkbox" name="allergens[]" value="Eggs"> Eggs</label>
-          <label class="checkbox-item"><input type="checkbox" name="allergens[]" value="Shellfish"> Shellfish</label>
-          <label class="checkbox-item"><input type="checkbox" name="allergens[]" value="Fish"> Fish</label>
-          <label class="checkbox-item"><input type="checkbox" name="allergens[]" value="Soya"> Soya</label>
-          <label class="checkbox-item"><input type="checkbox" name="allergens[]" value="Sesame"> Sesame</label>
-          <label class="checkbox-item"><input type="checkbox" name="allergens[]" value="Celery"> Celery</label>
-          <label class="checkbox-item"><input type="checkbox" name="allergens[]" value="Mustard"> Mustard</label>
-          <label class="checkbox-item"><input type="checkbox" name="allergens[]" value="Sulphites"> Sulphites</label>
-        </div>
 
         <div class="form-section-head" style="margin-top:1.75rem;">Song Request &amp; Message</div>
         <div class="form-row">
@@ -273,6 +245,12 @@
           <label class="checkbox-item"><input type="checkbox" name="guest_${i}_dietary[]" value="Halal"> Halal</label>
           <label class="checkbox-item"><input type="checkbox" name="guest_${i}_dietary[]" value="Kosher"> Kosher</label>
           <label class="checkbox-item"><input type="checkbox" name="guest_${i}_dietary[]" value="Pescatarian"> Pescatarian</label>
+        </div>
+        <div class="form-row single" style="margin-top:1rem;">
+          <div class="form-group">
+            <label>Allergies for ${lbl}</label>
+            <textarea name="guest_${i}_allergies" placeholder="e.g. Tree nuts, shellfish, dairy..."></textarea>
+          </div>
         </div></div>`;
     }
   }
