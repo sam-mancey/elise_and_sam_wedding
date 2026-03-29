@@ -189,23 +189,31 @@
 </div>
 
 <script>
-  function setAttending(val, el) {
-    document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
-    el.classList.add('active');
-    if (val === 'yes') {
-      document.getElementById('fields-section').style.display = 'block';
-      document.getElementById('declined-msg').style.display = 'none';
-    } else {
-      document.getElementById('fields-section').style.display = 'none';
-      document.getElementById('declined-msg').style.display = 'block';
-      fetch('https://formspree.io/f/mkopjbww', {
-        method: 'POST',
-        headers: {'Content-Type':'application/json','Accept':'application/json'},
-        body: JSON.stringify({guest_type:'Day Guest', attending:'No', _subject:'Day Guest RSVP (Declined) — Elise & Sam'})
-      });
-    }
+function setAttending(val, el) {
+  document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  if (val === 'yes') {
+    document.getElementById('fields-section').style.display = 'block';
+    document.getElementById('declined-msg').style.display = 'none';
+  } else {
+    document.getElementById('fields-section').style.display = 'none';
+    document.getElementById('declined-msg').style.display = 'block';
   }
+}
 
+function submitDeclined(name) {
+  if (!name.trim()) {
+    alert('Please enter your name');
+    return;
+  }
+  fetch('https://formspree.io/f/mkopjbww', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json','Accept':'application/json'},
+    body: JSON.stringify({guest_type:'Day Guest', attending:'No', name: name, _subject:'Day Guest RSVP (Declined) — Elise & Sam'})
+  }).then(() => {
+    document.getElementById('declined-msg').innerHTML = '<h3>Thank you</h3><p>We appreciate you letting us know. 🤍</p>';
+  });
+}
   function buildGuestRows(count) {
     const n = parseInt(count);
     const wrap = document.getElementById('guest-rows-wrap');
