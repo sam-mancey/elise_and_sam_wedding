@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elise & Sam — 3rd October 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --dust: #8fa8b8; --dust-light: #c2d4df; --dust-pale: #eaf1f5;
+    --dust-deep: #4f738a; --ink: #1c2b35; --ink-light: #4a6070;
+    --white: #fafcfd;
+    --serif: 'Cormorant Garamond', serif; --sans: 'DM Sans', sans-serif;
+    --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--white); color: var(--ink); line-height: 1.6; overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(250,252,253,0.88); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--dust-light);
+  }
+  .nav-logo { font-family: var(--serif); font-size: 1.2rem; letter-spacing: 0.05em; color: var(--dust-deep); font-style: italic; }
+  .nav-links { display: flex; gap: 2.5rem; }
+  .nav-links a { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-light); text-decoration: none; font-weight: 500; transition: color var(--transition); }
+  .nav-links a:hover { color: var(--dust-deep); }
+
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 8rem 2rem 5rem; position: relative;
+    background: linear-gradient(160deg, var(--dust-pale) 0%, var(--white) 55%); overflow: hidden;
+  }
+  .hero::before { content: ''; position: absolute; top: -20%; left: -10%; width: 65%; height: 80%; background: radial-gradient(ellipse, rgba(143,168,184,0.2) 0%, transparent 70%); pointer-events: none; }
+  .hero::after { content: ''; position: absolute; bottom: -10%; right: -5%; width: 50%; height: 60%; background: radial-gradient(ellipse, rgba(79,115,138,0.1) 0%, transparent 70%); pointer-events: none; }
+  .hero-eyebrow { font-size: 0.7rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--dust); margin-bottom: 1.5rem; font-weight: 500; animation: fadeUp 0.9s ease both; }
+  .hero h1 { font-family: var(--serif); font-size: clamp(4rem, 10vw, 8rem); font-weight: 300; line-height: 1.0; color: var(--ink); animation: fadeUp 0.9s 0.12s ease both; }
+  .hero h1 em { color: var(--dust-deep); font-style: italic; display: block; }
+  .hero-amp { font-size: clamp(2rem, 5vw, 4rem); color: var(--dust-light); display: block; line-height: 1.2; }
+  .hero-date { margin-top: 2rem; font-size: 0.78rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-light); animation: fadeUp 0.9s 0.25s ease both; }
+  .hero-rule { width: 50px; height: 1px; background: linear-gradient(90deg, transparent, var(--dust), transparent); margin: 1.75rem auto; animation: fadeUp 0.9s 0.35s ease both; }
+  .hero-venue { font-size: 0.85rem; color: var(--ink-light); animation: fadeUp 0.9s 0.45s ease both; }
+  .hero-actions { display: flex; gap: 1rem; justify-content: center; margin-top: 2.5rem; flex-wrap: wrap; animation: fadeUp 0.9s 0.55s ease both; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+  .btn { display: inline-block; padding: 0.85rem 2.5rem; font-size: 0.73rem; letter-spacing: 0.15em; text-transform: uppercase; font-family: var(--sans); font-weight: 500; background: var(--dust-deep); color: var(--white); border: none; cursor: pointer; text-decoration: none; transition: background var(--transition), transform var(--transition); }
+  .btn:hover { background: var(--ink); transform: translateY(-2px); }
+  .btn-outline { background: transparent; color: var(--dust-deep); border: 1px solid var(--dust); }
+  .btn-outline:hover { background: var(--dust-pale); }
+
+  section { padding: 6rem 2rem; }
+  .section-inner { max-width: 960px; margin: 0 auto; }
+  .section-label { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dust); margin-bottom: 0.6rem; font-weight: 500; }
+  .section-title { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; line-height: 1.1; margin-bottom: 1.5rem; }
+  .section-title em { color: var(--dust-deep); }
+  .section-body { color: var(--ink-light); font-size: 0.92rem; max-width: 580px; }
+
+  /* COUNTDOWN PHOTOS */
+  #countdown-section { padding: 4.5rem 2rem; background: var(--white); overflow: hidden; }
+  .countdown-wrap { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto 1fr; gap: 3rem; align-items: center; }
+  .countdown-photo { height: 340px; overflow: hidden; position: relative; }
+  .countdown-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.7s ease; }
+  .countdown-photo:hover img { transform: scale(1.04); }
+  .countdown-photo.left { clip-path: polygon(0 0, 100% 0, 94% 100%, 0 100%); }
+  .countdown-photo.right { clip-path: polygon(6% 0, 100% 0, 100% 100%, 0 100%); }
+  .countdown-center { text-align: center; padding: 0 0.5rem; }
+  .countdown-eyebrow { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dust); margin-bottom: 1.5rem; }
+  .countdown { display: flex; gap: 1.25rem; justify-content: center; align-items: flex-start; }
+  .count-item { text-align: center; min-width: 60px; }
+  .count-num { font-family: var(--serif); font-size: clamp(2.5rem, 4.5vw, 3.8rem); font-weight: 300; color: var(--dust-deep); line-height: 1; }
+  .count-label { font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dust); margin-top: 0.35rem; }
+  .count-sep { font-family: var(--serif); font-size: 2.2rem; color: var(--dust-light); padding-top: 0.3rem; }
+
+  /* SCHEDULE */
+  #schedule { background: var(--dust-pale); }
+  .timeline { margin-top: 3rem; }
+  .tl-item { display: grid; grid-template-columns: 88px 1px 1fr; gap: 0 1.5rem; padding-bottom: 2.5rem; }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-time { font-family: var(--serif); font-size: 1.35rem; color: var(--dust-deep); font-style: italic; text-align: right; padding-top: 0.05rem; }
+  .tl-line { background: var(--dust-light); position: relative; }
+  .tl-dot { position: absolute; top: 7px; left: 50%; transform: translateX(-50%); width: 9px; height: 9px; border-radius: 50%; background: var(--dust-deep); border: 2px solid var(--dust-pale); }
+  .tl-content h3 { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.2rem; }
+  .tl-content p { font-size: 0.83rem; color: var(--ink-light); }
+  .tl-badge { display: inline-block; font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.18rem 0.55rem; margin-bottom: 0.35rem; }
+  .tl-badge.day { background: rgba(201,169,110,0.18); color: #9a6f2e; }
+  .tl-badge.evening { background: var(--dust-deep); color: var(--white); }
+
+  /* VENUE */
+  .venue-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+  .venue-card { padding: 2rem; border: 1px solid var(--dust-light); background: var(--white); position: relative; }
+  .venue-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--dust); }
+  .venue-card h3 { font-family: var(--serif); font-size: 1.25rem; font-weight: 400; margin-bottom: 0.4rem; }
+  .venue-card .badge { font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dust); margin-bottom: 0.65rem; display: block; }
+  .venue-card p { font-size: 0.84rem; color: var(--ink-light); line-height: 1.75; }
+  .venue-card a { color: var(--dust-deep); text-decoration: none; font-size: 0.8rem; margin-top: 0.75rem; display: inline-block; }
+  .venue-card a:hover { text-decoration: underline; }
+  .highlight-box { background: var(--dust-pale); border-left: 3px solid var(--dust-deep); padding: 0.65rem 0.9rem; margin-top: 0.9rem; font-size: 0.8rem; color: var(--ink-light); line-height: 1.6; }
+
+  /* GIFTS */
+  #gifts { background: var(--dust-pale); }
+  .gift-box { margin-top: 2.5rem; padding: 2.5rem; border: 1px solid var(--dust-light); background: var(--white); max-width: 560px; }
+  .gift-box > p { font-size: 0.9rem; color: var(--ink-light); line-height: 1.8; margin-bottom: 1.75rem; }
+  .bank-block { border: 1px solid var(--dust-light); background: var(--dust-pale); padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; }
+  .bank-block .bank-head { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dust); margin-bottom: 0.9rem; }
+  .bank-row { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.45rem 0; border-bottom: 1px solid rgba(143,168,184,0.25); font-size: 0.84rem; }
+  .bank-row:last-of-type { border-bottom: none; margin-bottom: 0.5rem; }
+  .bank-row .label { color: var(--ink-light); flex-shrink: 0; }
+  .bank-row .value { font-family: var(--serif); font-size: 1.05rem; color: var(--ink); letter-spacing: 0.04em; }
+  .copy-btn { font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.25rem 0.6rem; border: 1px solid var(--dust-light); background: var(--white); color: var(--dust-deep); cursor: pointer; flex-shrink: 0; transition: all var(--transition); }
+  .copy-btn:hover { background: var(--dust-deep); color: var(--white); border-color: var(--dust-deep); }
+  .bank-ref { font-size: 0.75rem; color: var(--dust); font-style: italic; margin-top: 0.5rem; }
+  .gift-divider { border: none; border-top: 1px solid var(--dust-light); margin: 1.25rem 0; }
+  .gift-alt-label { font-size: 0.7rem; color: var(--ink-light); margin-bottom: 0.75rem; }
+  .gift-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .gift-link { display: inline-block; padding: 0.55rem 1.2rem; border: 1px solid var(--dust-light); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dust-deep); text-decoration: none; transition: all var(--transition); }
+  .gift-link:hover { background: var(--dust-deep); color: var(--white); border-color: var(--dust-deep); }
+
+  /* RSVP */
+  #rsvp-links { background: var(--ink); }
+  .rsvp-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+  .rsvp-card { padding: 2.5rem; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03); text-align: center; }
+  .rsvp-card h3 { font-family: var(--serif); font-size: 1.6rem; font-weight: 300; color: var(--white); margin-bottom: 0.5rem; }
+  .rsvp-card p { font-size: 0.83rem; color: rgba(255,255,255,0.4); margin-bottom: 1.75rem; line-height: 1.65; }
+  .rsvp-card .btn { display: block; }
+  .btn-evening { background: var(--dust) !important; }
+  .btn-evening:hover { background: var(--dust-deep) !important; }
+
+  footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--dust-light); font-size: 0.75rem; color: var(--ink-light); }
+  footer .mono { font-family: var(--serif); font-style: italic; color: var(--dust-deep); font-size: 1rem; }
+
+  @media (max-width: 860px) {
+    .countdown-wrap { grid-template-columns: 1fr; }
+    .countdown-photo { height: 240px; }
+    .countdown-photo.left, .countdown-photo.right { clip-path: none; }
+  }
+  @media (max-width: 700px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.25rem; }
+    .venue-grid, .rsvp-cards { grid-template-columns: 1fr; }
+    .count-sep { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">E &amp; S</div>
+  <div class="nav-links">
+    <a href="#schedule">Schedule</a>
+    <a href="#venue">Venue</a>
+    <a href="#gifts">Gifts</a>
+    <a href="#rsvp-links">RSVP</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <p class="hero-eyebrow">We're getting married</p>
+  <h1>Elise<span class="hero-amp">&amp;</span><em>Sam</em></h1>
+  <p class="hero-date">Saturday · 3rd October 2026</p>
+  <div class="hero-rule"></div>
+  <p class="hero-venue">Stanlake Vineyard · Twyford · Berkshire</p>
+  <div class="hero-actions">
+    <a href="#rsvp-links" class="btn">RSVP Now</a>
+    <a href="#schedule" class="btn btn-outline">View the Day</a>
+  </div>
+</section>
+
+<!-- COUNTDOWN WITH PHOTOS -->
+<section id="countdown-section">
+  <div class="countdown-wrap">
+    <div class="countdown-photo left">
+      <img src="photo-couple.jpg" alt="Elise and Sam at the engagement">
+    </div>
+    <div class="countdown-center">
+      <p class="countdown-eyebrow">Counting down</p>
+      <div class="countdown">
+        <div class="count-item"><div class="count-num" id="cd-days">—</div><div class="count-label">Days</div></div>
+        <div class="count-sep">·</div>
+        <div class="count-item"><div class="count-num" id="cd-hours">—</div><div class="count-label">Hours</div></div>
+        <div class="count-sep">·</div>
+        <div class="count-item"><div class="count-num" id="cd-mins">—</div><div class="count-label">Minutes</div></div>
+      </div>
+    </div>
+    <div class="countdown-photo right">
+      <img src="photo-ring.jpg" alt="The engagement ring">
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section id="schedule">
+  <div class="section-inner">
+    <p class="section-label">The Day</p>
+    <h2 class="section-title">Schedule &amp; <em>Timeline</em></h2>
+    <p class="section-body">Here's how our day will unfold. Day guests are invited from arrival through dinner; evening guests join us from 6:30pm.</p>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-time" style="font-size:1rem;padding-top:0.3rem;">TBC</div>
+        <div class="tl-line"><div class="tl-dot"></div></div>
+        <div class="tl-content"><span class="tl-badge day">Day Guests</span><h3>Guests Arrive</h3><p>Welcome drinks on arrival at Stanlake Vineyard</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">13:00</div>
+        <div class="tl-line"><div class="tl-dot"></div></div>
+        <div class="tl-content"><span class="tl-badge day">Day Guests</span><h3>Civil Ceremony</h3><p>The Coach House · Acoustic music by Tilly Lukeman</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">13:30</div>
+        <div class="tl-line"><div class="tl-dot"></div></div>
+        <div class="tl-content"><span class="tl-badge day">Day Guests</span><h3>Drinks Reception</h3><p>Courtyard (or Vineyard Barn if weather intervenes) · Tilly continues</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">15:00</div>
+        <div class="tl-line"><div class="tl-dot"></div></div>
+        <div class="tl-content"><span class="tl-badge day">Day Guests</span><h3>Guests Seated &amp; Couple's Entrance</h3><p>The Vineyard Barn</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">15:30</div>
+        <div class="tl-line"><div class="tl-dot"></div></div>
+        <div class="tl-content"><span class="tl-badge day">Day Guests</span><h3>Speeches</h3><p>Father of the Bride, Groom &amp; Best Man</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">16:00</div>
+        <div class="tl-line"><div class="tl-dot"></div></div>
+        <div class="tl-content"><span class="tl-badge day">Day Guests</span><h3>Wedding Breakfast</h3><p>Three courses in the Vineyard Barn</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">18:30</div>
+        <div class="tl-line"><div class="tl-dot"></div></div>
+        <div class="tl-content"><span class="tl-badge evening">Evening Guests</span><h3>Evening Guests Arrive</h3><p>Drinks, dancing &amp; evening food · Photo booth opens at 7pm</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">19:00</div>
+        <div class="tl-line"><div class="tl-dot"></div></div>
+        <div class="tl-content"><span class="tl-badge evening">Evening Guests</span><h3>Cake Cutting</h3><p>Wedding cake by Hannah Mancey</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">19:15</div>
+        <div class="tl-line"><div class="tl-dot"></div></div>
+        <div class="tl-content"><span class="tl-badge evening">Evening Guests</span><h3>First Dance &amp; DJ</h3><p>Dancing into the night with DJ Alastair</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">23:00</div>
+        <div class="tl-line"><div class="tl-dot"></div></div>
+        <div class="tl-content"><h3>DJ Finishes</h3><p>Bar closes at 23:30 · All guests to depart by midnight</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VENUE -->
+<section id="venue">
+  <div class="section-inner">
+    <p class="section-label">Location</p>
+    <h2 class="section-title">Venue &amp; <em>Directions</em></h2>
+    <p class="section-body">Stanlake Vineyard is a beautiful working vineyard in the Berkshire countryside, just minutes from Twyford and easily accessible from the M4.</p>
+    <div class="venue-grid">
+      <div class="venue-card">
+        <span class="badge">Ceremony &amp; Reception</span>
+        <h3>Stanlake Vineyard</h3>
+        <p>Twyford, Reading<br>Berkshire, RG10 0BN<br><br>Please follow signs to the main entrance on arrival. The Coach House and Vineyard Barn are clearly signposted from the car park.</p>
+        <a href="https://maps.google.com/?q=Stanlake+Vineyard+Twyford+RG10+0BN" target="_blank">→ Open in Google Maps</a>
+      </div>
+      <div class="venue-card">
+        <span class="badge">Parking</span>
+        <h3>Car Park &amp; Overnight</h3>
+        <p>Free on-site parking is available throughout the day and evening. Please don't drink and drive — we want everyone home safely.</p>
+        <div class="highlight-box">🚗 <strong>Cars may be left overnight</strong> and collected the following morning between <strong>9:00am and 11:00am only</strong>. Please do not collect after 11am.</div>
+      </div>
+      <div class="venue-card">
+        <span class="badge">Getting Here</span>
+        <h3>Travel &amp; Directions</h3>
+        <p><strong>By Car:</strong> 5 mins from Twyford · 15 mins from Reading · M4 Junction 8/9 then A404(M) north.<br><br><strong>By Train:</strong> Twyford station is 30 mins from London Paddington and 8 mins from Reading. A short taxi ride from the station (approx. 5 mins).</p>
+      </div>
+      <div class="venue-card">
+        <span class="badge">Where to Stay</span>
+        <h3>Nearby Hotels</h3>
+        <p>A few options within easy reach:<br><br>
+        <strong>The Stag &amp; Hounds, Binfield</strong> — 15 mins<br>
+        <strong>Holiday Inn, Reading South</strong> — 20 mins<br>
+        <strong>Premier Inn, Reading Centre</strong> — 20 mins<br><br>
+        We recommend booking early as October weekends fill quickly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GIFTS -->
+<section id="gifts">
+  <div class="section-inner">
+    <p class="section-label">Wishing Well</p>
+    <h2 class="section-title">Gift <em>Registry</em></h2>
+    <p class="section-body">Your presence is truly the greatest gift. If you'd like to contribute something, we'd love help with our honeymoon fund.</p>
+    <div class="gift-box">
+      <p>We've been fortunate enough to set up our home together already — so rather than a traditional gift list, we've created a honeymoon wishing well. Every contribution goes toward memories we'll treasure forever. You can send a contribution by bank transfer below, or via the links provided.</p>
+      <div class="bank-block">
+        <div class="bank-head">Bank Transfer Details</div>
+        <div class="bank-row">
+          <span class="label">Account Name</span>
+          <span class="value">S Mancey</span>
+          <button class="copy-btn" onclick="copyVal('S Mancey', this)">Copy</button>
+        </div>
+        <div class="bank-row">
+          <span class="label">Sort Code</span>
+          <span class="value" id="sort-code">XX-XX-XX</span>
+          <button class="copy-btn" onclick="copyVal(document.getElementById('sort-code').textContent, this)">Copy</button>
+        </div>
+        <div class="bank-row">
+          <span class="label">Account Number</span>
+          <span class="value" id="acc-num">XXXXXXXX</span>
+          <button class="copy-btn" onclick="copyVal(document.getElementById('acc-num').textContent, this)">Copy</button>
+        </div>
+        <p class="bank-ref">💙 Please use your name as the payment reference so we know who to thank!</p>
+      </div>
+      <hr class="gift-divider">
+      <p class="gift-alt-label">Or send a contribution via:</p>
+      <div class="gift-links">
+        <a href="#" class="gift-link" target="_blank">PayPal.me/[yourlink] →</a>
+        <a href="#" class="gift-link" target="_blank">Monzo.me/[yourlink] →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RSVP -->
+<section id="rsvp-links">
+  <div class="section-inner">
+    <p class="section-label">Attendance</p>
+    <h2 class="section-title" style="color:var(--white);">Please <em style="color:var(--dust-light);">RSVP</em></h2>
+    <p class="section-body" style="color:rgba(255,255,255,0.45);">Kindly respond by <strong style="color:rgba(255,255,255,0.7);">1st June 2026</strong>.</p>
+    <div class="rsvp-cards">
+      <div class="rsvp-card">
+        <h3>Day Guest</h3>
+        <p>You're invited to join us for the full day — ceremony, drinks reception, wedding breakfast and evening celebrations.</p>
+        <a href="day.html" class="btn">RSVP as Day Guest →</a>
+      </div>
+      <div class="rsvp-card">
+        <h3>Evening Guest</h3>
+        <p>You're invited to join us from 6:30pm for drinks, dancing, the first dance and evening food.</p>
+        <a href="evening.html" class="btn btn-evening">RSVP as Evening Guest →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p class="mono">Elise &amp; Sam · 3rd October 2026</p>
+  <p style="margin-top:0.5rem;">Stanlake Vineyard · Twyford · Berkshire · RG10 0BN</p>
+</footer>
+
+<script>
+  function tick() {
+    const wedding = new Date('2026-10-03T13:00:00');
+    const diff = wedding - new Date();
+    if (diff <= 0) { document.getElementById('cd-days').textContent = '🎉'; return; }
+    document.getElementById('cd-days').textContent = Math.floor(diff / 86400000);
+    document.getElementById('cd-hours').textContent = Math.floor((diff % 86400000) / 3600000);
+    document.getElementById('cd-mins').textContent = Math.floor((diff % 3600000) / 60000);
+  }
+  tick(); setInterval(tick, 30000);
+
+  function copyVal(text, btn) {
+    navigator.clipboard.writeText(text).then(() => {
+      const orig = btn.textContent;
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = orig, 1500);
+    });
+  }
+</script>
+</body>
+</html>
