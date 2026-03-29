@@ -278,11 +278,11 @@ document.addEventListener('input', function(e) {
       
       // Jump scare visual
       const scare = document.createElement('div');
-      scare.innerHTML = '👻 GOTCHA ANNETTE! 👻';
+      scare.innerHTML = '👻 ANNETTE IS A LOSER!! 👻';
       scare.style.cssText = `
         position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
         font-size: 4rem; font-weight: bold; z-index: 9999;
-        animation: scare 0.6s ease-in-out;
+        animation: scare 3s ease-in-out;
         pointer-events: none;
       `;
       document.body.appendChild(scare);
@@ -301,73 +301,6 @@ document.addEventListener('input', function(e) {
     }, 300);
   }
 });
-
-document.getElementById('rsvp-form').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  const btn = document.getElementById('submit-btn');
-  btn.disabled = true; btn.textContent = 'Sending…';
-  try {
-    const res = await fetch(this.action, {method:'POST', body: new FormData(this), headers:{Accept:'application/json'}});
-    if (res.ok) {
-      document.getElementById('fields-section').style.display = 'none';
-      document.querySelector('.attending-row').style.display = 'none';
-      document.getElementById('success-screen').style.display = 'block';
-    } else {
-      btn.disabled = false; btn.textContent = 'Submit RSVP →';
-      alert('Something went wrong — please try again.');
-    }
-  } catch { btn.disabled = false; btn.textContent = 'Submit RSVP →'; alert('Network error — please check your connection.'); }
-});
-
-</script>
-function submitDeclined(name) {
-  if (!name.trim()) {
-    alert('Please enter your name');
-    return;
-  }
-  fetch('https://formspree.io/f/mkopjbww', {
-    method: 'POST',
-    headers: {'Content-Type':'application/json','Accept':'application/json'},
-    body: JSON.stringify({guest_type:'Day Guest', attending:'No', name: name, _subject:'Day Guest RSVP (Declined) — Elise & Sam'})
-  }).then(() => {
-    document.getElementById('declined-msg').innerHTML = '<h3>Thank you</h3><p>We appreciate you letting us know. 🤍</p>';
-  });
-}
-
-function buildGuestRows(count) {
-  const n = parseInt(count);
-  const wrap = document.getElementById('guest-rows-wrap');
-  const rows = document.getElementById('guest-rows');
-  const dietarySec = document.getElementById('dietary-section');
-  const dietaryRows = document.getElementById('dietary-rows');
-  if (!n) { wrap.style.display='none'; dietarySec.style.display='none'; return; }
-  wrap.style.display='block'; dietarySec.style.display='block';
-  rows.innerHTML = ''; dietaryRows.innerHTML = '';
-  for (let i = 1; i <= n; i++) {
-    const lbl = i === 1 ? 'Guest 1 (You)' : `Guest ${i}`;
-    rows.innerHTML += `<div class="guest-row"><div class="guest-row-label">${lbl}</div>
-      <div class="form-row" style="margin-bottom:0;">
-        <div class="form-group"><label>First name <span class="req">*</span></label><input type="text" name="guest_${i}_firstname" placeholder="First name" required></div>
-        <div class="form-group"><label>Last name <span class="req">*</span></label><input type="text" name="guest_${i}_lastname" placeholder="Last name" required></div>
-      </div></div>`;
-    dietaryRows.innerHTML += `<div class="guest-row" style="margin-bottom:1rem;"><div class="guest-row-label">${lbl} — Dietary Requirements</div>
-      <div class="checkbox-grid">
-        <label class="checkbox-item"><input type="checkbox" name="guest_${i}_dietary[]" value="Vegetarian"> Vegetarian</label>
-        <label class="checkbox-item"><input type="checkbox" name="guest_${i}_dietary[]" value="Vegan"> Vegan</label>
-        <label class="checkbox-item"><input type="checkbox" name="guest_${i}_dietary[]" value="Gluten Free"> Gluten Free</label>
-        <label class="checkbox-item"><input type="checkbox" name="guest_${i}_dietary[]" value="Dairy Free"> Dairy Free</label>
-        <label class="checkbox-item"><input type="checkbox" name="guest_${i}_dietary[]" value="Halal"> Halal</label>
-        <label class="checkbox-item"><input type="checkbox" name="guest_${i}_dietary[]" value="Kosher"> Kosher</label>
-        <label class="checkbox-item"><input type="checkbox" name="guest_${i}_dietary[]" value="Pescatarian"> Pescatarian</label>
-      </div>
-      <div class="form-row single" style="margin-top:1rem;">
-        <div class="form-group">
-          <label>Allergies for ${lbl}</label>
-          <textarea name="guest_${i}_allergies" placeholder="e.g. Tree nuts, shellfish, dairy..."></textarea>
-        </div>
-      </div></div>`;
-  }
-}
 
 document.getElementById('rsvp-form').addEventListener('submit', async function(e) {
   e.preventDefault();
