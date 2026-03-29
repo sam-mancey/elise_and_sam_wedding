@@ -282,7 +282,7 @@ document.addEventListener('input', function(e) {
       scare.style.cssText = `
         position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
         font-size: 4rem; font-weight: bold; z-index: 9999;
-        animation: scare 3s ease-in-out;
+        animation: scare 0.6s ease-in-out;
         pointer-events: none;
       `;
       document.body.appendChild(scare);
@@ -297,7 +297,7 @@ document.addEventListener('input', function(e) {
       `;
       document.head.appendChild(style);
       
-      setTimeout(() => scare.remove(), 600);
+      setTimeout(() => scare.remove(), 2000);
     }, 300);
   }
 });
