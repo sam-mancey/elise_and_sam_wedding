@@ -187,15 +187,18 @@
   </div>
 
 </div>
-
 <script>
+let attendingYes = false;
+
 function setAttending(val, el) {
   document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
   el.classList.add('active');
   if (val === 'yes') {
+    attendingYes = true;
     document.getElementById('fields-section').style.display = 'block';
     document.getElementById('declined-msg').style.display = 'none';
   } else {
+    attendingYes = false;
     document.getElementById('fields-section').style.display = 'none';
     document.getElementById('declined-msg').style.display = 'block';
   }
@@ -215,23 +218,42 @@ function submitDeclined(name) {
   });
 }
 
-// Easter egg: Jump scare for Annette (when attending)
-let attendingYes = false;
-
-function setAttending(val, el) {
-  document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
-  el.classList.add('active');
-  if (val === 'yes') {
-    attendingYes = true;
-    document.getElementById('fields-section').style.display = 'block';
-    document.getElementById('declined-msg').style.display = 'none';
-  } else {
-    attendingYes = false;
-    document.getElementById('fields-section').style.display = 'none';
-    document.getElementById('declined-msg').style.display = 'block';
+function buildGuestRows(count) {
+  const n = parseInt(count);
+  const wrap = document.getElementById('guest-rows-wrap');
+  const rows = document.getElementById('guest-rows');
+  const dietarySec = document.getElementById('dietary-section');
+  const dietaryRows = document.getElementById('dietary-rows');
+  if (!n) { wrap.style.display='none'; dietarySec.style.display='none'; return; }
+  wrap.style.display='block'; dietarySec.style.display='block';
+  rows.innerHTML = ''; dietaryRows.innerHTML = '';
+  for (let i = 1; i <= n; i++) {
+    const lbl = i === 1 ? 'Guest 1 (You)' : `Guest ${i}`;
+    rows.innerHTML += `<div class="guest-row"><div class="guest-row-label">${lbl}</div>
+      <div class="form-row" style="margin-bottom:0;">
+        <div class="form-group"><label>First name <span class="req">*</span></label><input type="text" name="guest_${i}_firstname" placeholder="First name" required></div>
+        <div class="form-group"><label>Last name <span class="req">*</span></label><input type="text" name="guest_${i}_lastname" placeholder="Last name" required></div>
+      </div></div>`;
+    dietaryRows.innerHTML += `<div class="guest-row" style="margin-bottom:1rem;"><div class="guest-row-label">${lbl} — Dietary Requirements</div>
+      <div class="checkbox-grid">
+        <label class="checkbox-item"><input type="checkbox" name="guest_${i}_dietary[]" value="Vegetarian"> Vegetarian</label>
+        <label class="checkbox-item"><input type="checkbox" name="guest_${i}_dietary[]" value="Vegan"> Vegan</label>
+        <label class="checkbox-item"><input type="checkbox" name="guest_${i}_dietary[]" value="Gluten Free"> Gluten Free</label>
+        <label class="checkbox-item"><input type="checkbox" name="guest_${i}_dietary[]" value="Dairy Free"> Dairy Free</label>
+        <label class="checkbox-item"><input type="checkbox" name="guest_${i}_dietary[]" value="Halal"> Halal</label>
+        <label class="checkbox-item"><input type="checkbox" name="guest_${i}_dietary[]" value="Kosher"> Kosher</label>
+        <label class="checkbox-item"><input type="checkbox" name="guest_${i}_dietary[]" value="Pescatarian"> Pescatarian</label>
+      </div>
+      <div class="form-row single" style="margin-top:1rem;">
+        <div class="form-group">
+          <label>Allergies for ${lbl}</label>
+          <textarea name="guest_${i}_allergies" placeholder="e.g. Tree nuts, shellfish, dairy..."></textarea>
+        </div>
+      </div></div>`;
   }
 }
 
+// Easter egg: Jump scare for Annette (when attending)
 document.addEventListener('input', function(e) {
   if (attendingYes && e.target.name === 'guest_1_firstname' && e.target.value.toLowerCase() === 'annette') {
     setTimeout(() => {
@@ -280,6 +302,24 @@ document.addEventListener('input', function(e) {
   }
 });
 
+document.getElementById('rsvp-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true; btn.textContent = 'Sending…';
+  try {
+    const res = await fetch(this.action, {method:'POST', body: new FormData(this), headers:{Accept:'application/json'}});
+    if (res.ok) {
+      document.getElementById('fields-section').style.display = 'none';
+      document.querySelector('.attending-row').style.display = 'none';
+      document.getElementById('success-screen').style.display = 'block';
+    } else {
+      btn.disabled = false; btn.textContent = 'Submit RSVP →';
+      alert('Something went wrong — please try again.');
+    }
+  } catch { btn.disabled = false; btn.textContent = 'Submit RSVP →'; alert('Network error — please check your connection.'); }
+});
+
+</script>
 function submitDeclined(name) {
   if (!name.trim()) {
     alert('Please enter your name');
