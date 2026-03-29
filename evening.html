@@ -129,8 +129,8 @@
 
   <div id="fields-section" style="display:none;" class="fade-in">
     <form id="rsvp-form" action="https://formspree.io/f/mkopjbww" method="POST">
-      <input type="hidden" name="_subject" value="Day Guest RSVP — Elise & Sam">
-      <input type="hidden" name="guest_type" value="Day Guest">
+      <input type="hidden" name="_subject" value="Evening Guest RSVP — Elise & Sam">
+      <input type="hidden" name="guest_type" value="Evening Guest">
       <input type="hidden" name="attending" value="Yes">
 
       <div class="form-section-head">Your Party</div>
@@ -216,7 +216,7 @@ function submitDeclined(name) {
   fetch('https://formspree.io/f/mkopjbww', {
     method: 'POST',
     headers: {'Content-Type':'application/json','Accept':'application/json'},
-    body: JSON.stringify({guest_type:'Day Guest', attending:'No', name: name, _subject:'Day Guest RSVP (Declined) — Elise & Sam'})
+    body: JSON.stringify({guest_type:'Evening Guest', attending:'No', name: name, _subject:'Evening Guest RSVP (Declined) — Elise & Sam'})
   }).then(() => {
     document.getElementById('declined-msg').innerHTML = '<h3>Thank you</h3><p>We appreciate you letting us know. 🤍</p>';
   });
