@@ -102,23 +102,10 @@
 
   /* GIFTS */
   #gifts { background: var(--dust-pale); }
-  .gift-box { margin-top: 2.5rem; padding: 2.5rem; border: 1px solid var(--dust-light); background: var(--white); max-width: 560px; }
-  .gift-box > p { font-size: 0.9rem; color: var(--ink-light); line-height: 1.8; margin-bottom: 1.75rem; }
-  .bank-block { border: 1px solid var(--dust-light); background: var(--dust-pale); padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; }
-  .bank-block .bank-head { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dust); margin-bottom: 0.9rem; }
-  .bank-row { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.45rem 0; border-bottom: 1px solid rgba(143,168,184,0.25); font-size: 0.84rem; }
-  .bank-row:last-of-type { border-bottom: none; margin-bottom: 0.5rem; }
-  .bank-row .label { color: var(--ink-light); flex-shrink: 0; }
-  .bank-row .value { font-family: var(--serif); font-size: 1.05rem; color: var(--ink); letter-spacing: 0.04em; }
-  .copy-btn { font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.25rem 0.6rem; border: 1px solid var(--dust-light); background: var(--white); color: var(--dust-deep); cursor: pointer; flex-shrink: 0; transition: all var(--transition); }
-  .copy-btn:hover { background: var(--dust-deep); color: var(--white); border-color: var(--dust-deep); }
-  .bank-ref { font-size: 0.75rem; color: var(--dust); font-style: italic; margin-top: 0.5rem; }
-  .gift-divider { border: none; border-top: 1px solid var(--dust-light); margin: 1.25rem 0; }
-  .gift-alt-label { font-size: 0.7rem; color: var(--ink-light); margin-bottom: 0.75rem; }
-  .gift-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-  .gift-link { display: inline-block; padding: 0.55rem 1.2rem; border: 1px solid var(--dust-light); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dust-deep); text-decoration: none; transition: all var(--transition); }
-  .gift-link:hover { background: var(--dust-deep); color: var(--white); border-color: var(--dust-deep); }
-
+  .gift-box { margin-top: 2.5rem; padding: 2.5rem; border: 1px solid var(--dust-light); background: var(--white); max-width: 420px; text-align: center; }
+  .gift-header { font-family: var(--serif); font-size: 1.5rem; font-weight: 300; line-height: 1.3; margin-bottom: 1.5rem; color: var(--ink); }
+  .monzo-qr { width: 100%; max-width: 220px; height: auto; display: block; margin: 0 auto 1rem; border: 1px solid var(--dust-light); padding: 8px; background: #fff; }
+  .gift-scan { font-size: 0.8rem; color: var(--ink-light); margin-bottom: 1.5rem; }
   /* RSVP */
   #rsvp-links { background: var(--ink); }
   .rsvp-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
@@ -295,6 +282,13 @@
     <p class="section-label">Wishing Well</p>
     <h2 class="section-title">Gift <em>Registry</em></h2>
     <p class="section-body">Your presence is truly the greatest gift. We've been fortunate enough to set up our home together already. So rather than a traditional gift list, if you'd like to contribute something, we'd love help with our honeymoon fund.</p>
+
+    <div class="gift-box">
+      <h3 class="gift-header">By popular request, here are our payment details</h3>
+      <img src="monzo.jpeg" alt="Monzo QR code" class="monzo-qr">
+      <p class="gift-scan">Scan the QR code, or tap the button below</p>
+      <a href="https://monzo.me/elisegerken?h=uTWHPY&amp;account_type=personal" class="btn" target="_blank" rel="noopener">Pay with Monzo →</a>
+    </div>
   </div>
 </section>
 
